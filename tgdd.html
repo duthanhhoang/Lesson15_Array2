@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Thế giới di động</h1>
+    <button onclick="themSanPham()">Thêm sản phẩm</button>
+    <!-- <button onclick="xoaSanPham()">Xoá sản phẩm</button> -->
+    <div id="list-product"></div>
+    <script>
+        let products = [
+            ["https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/250625/samsung-galaxy-z-fold4-kem-256gb-600x600.jpg", "Samsung Galaxy", 30990000],
+            ["https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/54/253802/bluetooth-airpods-pro-magsafe-charge-apple-mlwk3-thumb-600x600.jpeg", "Tai nghe Airpod", 4690000],
+            ["images/tai-nghe.jpg", "Tai nghe Mozard", 355000],
+            ["images/dell.jpg", "Dell XPS 17", 49990000],
+        ]
+        function hienThiSanPham() {
+            let str = "";
+            for (let i = 0; i < products.length; i++) {
+                // str += `<div class='product'>`;
+                // str += `<p><img src="${products[i][0]}" width="100px"></p>`;
+                // str += `<p>${products[i][1]}</p>`;
+                // str += `<p>${products[i][2]}</p>`;
+                // str += `</div>`
+
+                str += `<div class="card">
+                            <div class="img-border">
+                                <img src="${products[i][0]}" alt="${products[i][0]}" style="width:100%">
+                            </div>
+                            <h1>${products[i][1]}</h1>
+                            <p class="price">${products[i][2]}</p>
+                            <p><button>Add to Cart</button></p>
+                            <p><button onclick="xoaSanPham(${i})">Xoá nó</button></p>
+                            <p><button onclick="suaSanPham(${i})">Sửa nó</button></p>
+                        </div>`;
+            }
+            document.getElementById("list-product").innerHTML = str;
+        }
+
+        function themSanPham() {
+            let name = prompt("Tên sản phẩm");
+            let price = prompt("Giá sản phẩm");
+            let img = prompt("Ảnh sản phẩm");
+
+            let productInfo = [img, name, price];
+            products.push(productInfo);
+            hienThiSanPham();
+        }
+
+        function xoaSanPham(index){
+            products.splice(index,1);
+            hienThiSanPham();
+        }
+
+        function suaSanPham(index) {
+            products[index][0] = prompt("Link ảnh",products[index][0])
+            products[index][1] = prompt("Tên sản phẩm",products[index][1])
+            products[index][2] = prompt("Giá sản phẩm",products[index][2])
+            hienThiSanPham();
+        }
+
+        hienThiSanPham();
+    </script>
+</body>
+</html>
